@@ -19,7 +19,10 @@ app.use(express.static(path.join(__dirname, 'build')));
 // Middleware to verify token and assign user object of payload to req.user.
 // Be sure to mount before routes
 app.use(require('./config/checkToken'));
-
+app.use(function(req, res, next) {
+  console.log('user', req.method)
+  next();
+})
 
 const port = process.env.PORT || 3001;
 

@@ -20,20 +20,20 @@ export default function App() {
   return (
     <main className="App">
       { user ?
-          <>
-            <NavBar user={user} setUser={setUser} />
-          </>
-          :
-          <AuthPage setUser={setUser} />
+        <>
+          <NavBar user={user} setUser={setUser} />
+          {showNotes ? ( 
+            <NoteList notes={notes} addNote={addNote}/>)
+            : (
+            <p>No Notes Yet</p>
+          )}
+          <div>
+            <NewNoteForm notes={notes} addNote={addNote}/>
+          </div>
+        </>
+        :
+        <AuthPage setUser={setUser} />
       }
-        {showNotes ? ( 
-          <NoteList notes={notes} addNote={addNote}/>)
-          : (
-          <p>No Notes Yet</p>
-        )}
-      <div>
-        <NewNoteForm notes={notes} addNote={addNote}/>
-      </div>
     </main>
   );
 }
