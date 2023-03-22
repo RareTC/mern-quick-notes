@@ -12,9 +12,11 @@ export default async function sendRequest(url, method = 'GET', payload = null) {
     if(token) {
         //need to add an auth header
         //use the logical OR assignment operator
-        options.headers ||= {};
+        options.headers = options.headers || {};
         options.headers.Authorization = `Bearer ${token}`;
     }
+
+    console.log(token,'send request')
     const res = await fetch (url, options);
     //if res.ok is false then there is an error 
     if (res.ok) return res.json();

@@ -2,12 +2,12 @@ import { useState } from 'react';
 
 
 export default function NewNoteForm({addNote}) {
-  const [newNote, setNewNote] = useState({note: ""});
+  const [newNote, setNewNote] = useState({text: ""});
 
   function handleAddNote(evt) {
     evt.preventDefault();
     addNote(newNote);
-    setNewNote({note:""});
+    setNewNote({text:""});
   }
 
   function handleChange(evt) {
@@ -21,8 +21,8 @@ export default function NewNoteForm({addNote}) {
       <form onSubmit={handleAddNote}>
           <input 
           type="text"
-          name="note"
-          value={newNote.note}
+          name="text"
+          value={newNote.text}
           onChange={handleChange}
           placeholder="Make Note"
           required
