@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { getUser } from '../../utilities/users-service';
 import './App.css';
 import AuthPage from '../AuthPage/AuthPage';
@@ -14,22 +14,27 @@ export default function App() {
 
   async function addNote(note) {
     const newNote = await notesAPI.createNote(note);
+    console.log('newNote:', newNote);
     setNotes([...notes, newNote])
   }
+
+  useEffect(() => {
+    async function getNotes() {
+      const allNotes = await notesAPI.indexNote();
+      setNotes(allNotes);
+    }
+    getNotes();
+  }, []);
 
   return (
     <main className="App">
       { user ?
         <>
           <NavBar user={user} setUser={setUser} />
-          {showNotes ? ( 
-            <NoteList notes={notes} addNote={addNote}/>)
-            : (
-            <p>No Notes Yet</p>
-          )}
           <div>
             <NewNoteForm notes={notes} addNote={addNote}/>
           </div>
+            <NoteList notes={notes} addNote={addNote}/>
         </>
         :
         <AuthPage setUser={setUser} />

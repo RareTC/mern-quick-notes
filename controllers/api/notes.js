@@ -14,6 +14,7 @@ async function create(req, res) {
         res.status(400).json(err);
     }
 }
+
 async function index(req, res) {
     try {
         const notes = await Note.find({user: req.user._id})
